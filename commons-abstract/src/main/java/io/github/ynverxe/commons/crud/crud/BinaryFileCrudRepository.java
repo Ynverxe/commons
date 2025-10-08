@@ -22,7 +22,7 @@ public class BinaryFileCrudRepository implements CrudRepository<String, byte[]> 
   @Override
   public void upsert(@NotNull String key, byte @NotNull [] object) throws FailedCrudOperationException {
     try {
-      write(buildPath(key), object, StandardOpenOption.CREATE);
+      write(buildPath(key), object, StandardOpenOption.CREATE, StandardOpenOption.TRUNCATE_EXISTING);
     } catch (IOException exception) {
       throw new FailedCrudOperationException(exception);
     }
