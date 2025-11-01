@@ -61,14 +61,10 @@ public class DefaultConfigurationService extends AbstractConfigurationService {
       this.factory.saveConfigurationNodeInFilesystem(destinationFile, node);
     }
 
-    if (fallback != null) {
-      applyMissing(fallback, node);
-    }
-
     return node;
   }
 
-  private static void applyMissing(ConfigurationNode from, ConfigurationNode to) {
+  protected void applyMissing(ConfigurationNode from, ConfigurationNode to) {
     for (var entry : from.childrenMap().entrySet()) {
       Object key = entry.getKey();
       ConfigurationNode fromChild = entry.getValue();
