@@ -1,6 +1,6 @@
 subprojects {
   group = "io.github.ynverxe"
-  version = "0.1.1"
+  version = "1.0.0"
 
   plugins.withId("java-library") {
     apply<MavenPublishPlugin>()
