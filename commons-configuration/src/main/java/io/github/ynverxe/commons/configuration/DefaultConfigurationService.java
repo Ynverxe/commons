@@ -64,7 +64,11 @@ public class DefaultConfigurationService extends AbstractConfigurationService {
     return node;
   }
 
-  protected void applyMissing(ConfigurationNode from, ConfigurationNode to) {
+  protected void applyMissing(ConfigurationNode from, ConfigurationNode to, int depth) {
+    if (depth == 0) {
+      return;
+    }
+
     for (var entry : from.childrenMap().entrySet()) {
       Object key = entry.getKey();
       ConfigurationNode fromChild = entry.getValue();
@@ -73,7 +77,7 @@ public class DefaultConfigurationService extends AbstractConfigurationService {
       if (toChild.virtual()) {
         toChild.raw(fromChild.raw());
       } else {
-        applyMissing(fromChild, toChild);
+        applyMissing(fromChild, toChild, depth - 1);
       }
     }
   }
